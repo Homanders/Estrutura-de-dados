@@ -1,0 +1,30 @@
+name: C++ Build and Run
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo do repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar compilador e make
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Compilar projeto
+        run: |
+          make clean
+          make
+
+      - name: Executar programa
+        run: |
+          ./sistema
